@@ -1,0 +1,4 @@
+Run in jenkins before running docker:
+
+Sign into dynatrace:
+docker login -u <environmentID> <ADDRESS>

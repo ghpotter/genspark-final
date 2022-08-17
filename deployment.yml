@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gp-final 
+  labels:
+    app: gp-final
+spec:
+  selector:
+    matchLabels:
+        app: gp-final
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: gp-final
+    spec:
+      containers:
+        - name: gp-final
+          image: ghpotter/gp-final:tagname
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          imagePullPolicy: Always

@@ -1,0 +1,20 @@
+FROM ubuntu:latest
+
+# install splunk forwarder
+RUN aws s3 cp s3://ghpotter-buckets-of-fun/splunkforwarder-9.0.0.1-9e907cedecb1-linux-2.6-amd64.deb ~
+RUN dkg -i splunkforwarder-9.0.0.1-9e907cedecb1-linux-2.6-amd64.deb
+RUN opt/splunkforwarder/splunk add monitor /var/log
+# CONFIGURE CORRECTLY
+RUN opt/splunkforwarder/splunk add forward-server http://54.88.13.143:9997
+RUN opt/splunkforwarder/bin/splunk start --accept-license
+
+# install dynatrace agent
+# COPY --from=gjf76907.live.dynatrace.com/linux/oneagent-codemodules:apache / /
+# ENV LD_PRELOAD /opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so
+
+
+# install php
+FROM php:7.4-apache
+
+# copy simple html file
+COPY . /var/www/html
