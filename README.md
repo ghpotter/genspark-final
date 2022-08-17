@@ -13,12 +13,13 @@ production software system.
 --------------------------------------------------------------------------------
 
 Outline:
-Set-up jenkins
- - create 3 jenkins jobs
- - 1 build docker file
-  - Docker file contains app, and fowarders for splunk and dynatrace
-  - Build docker when change to source code
- - 2 run terraform to set-up cluster
- - 3 push docker images to cluster
+1. Set-up jenkins
+2. Create jenkinsfile with 3 steps
+   1. Build docker file
+   2. Run terraform to set-up cluster
+   3. Push docker images to cluster
+
+The docker file contains the app, dynatrace agent, and splunk forwarder
+Terraform sets up a managed EKS cluster
 
 bonus: create job that tears it all down
